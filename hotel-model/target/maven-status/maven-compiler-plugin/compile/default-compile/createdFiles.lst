@@ -1,0 +1,11 @@
+com/johanw/stackoverflow/hotel/model/StarRating.class
+com/johanw/stackoverflow/hotel/model/impl/DayType.class
+com/johanw/stackoverflow/hotel/model/Dealer$Deal.class
+com/johanw/stackoverflow/hotel/model/impl/HotelImpl$Builder.class
+com/johanw/stackoverflow/hotel/model/Dealer.class
+com/johanw/stackoverflow/hotel/model/impl/Price$Builder.class
+com/johanw/stackoverflow/hotel/model/Hotel.class
+com/johanw/stackoverflow/hotel/model/impl/HotelImpl.class
+com/johanw/stackoverflow/hotel/model/impl/NoPriceSpecifiedException.class
+com/johanw/stackoverflow/hotel/model/CustomerType.class
+com/johanw/stackoverflow/hotel/model/impl/Price.class
