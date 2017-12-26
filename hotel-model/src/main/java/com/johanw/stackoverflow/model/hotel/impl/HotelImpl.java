@@ -1,14 +1,17 @@
-package com.johanw.stackoverflow.hotel.model.impl;
+package com.johanw.stackoverflow.model.hotel.impl;
 
-import com.johanw.stackoverflow.hotel.model.CustomerType;
-import com.johanw.stackoverflow.hotel.model.Hotel;
-import com.johanw.stackoverflow.hotel.model.StarRating;
+import com.johanw.stackoverflow.model.hotel.CustomerType;
+import com.johanw.stackoverflow.model.hotel.Hotel;
+import com.johanw.stackoverflow.model.hotel.StarRating;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class HotelImpl implements Hotel {
     static Logger logger = LoggerFactory.getLogger(HotelImpl.class);
@@ -17,7 +20,7 @@ public class HotelImpl implements Hotel {
     private StarRating rating;
     private Map<String, Price> prices;
 
-    public HotelImpl(String name) {
+    private HotelImpl(String name) {
         this.name = name;
     }
 
@@ -37,19 +40,19 @@ public class HotelImpl implements Hotel {
         return null;
     }
 
-    public Double getPrice(CustomerType customerType, LocalDate... date) {
-        logger.info("getPrice for {}, for dates {}", customerType, Arrays.toString(date));
-        double price = 0;
-        for (int i = 0; i < date.length; i++) {
-            LocalDate ld = date[i];
-            Optional<Price> priceForDate = getPrice(customerType, ld);
-            if (priceForDate.isPresent()) {
-                price = price + priceForDate.get().getPrice();
-            } else {
-                throw new NoPriceSpecifiedException("No price available for " + customerType + " " + ld);
-            }
-        }
-        return price;
+    // Use Supplier of Stream: https://stackoverflow.com/questions/23860533/copy-a-stream-to-avoid-stream-has-already-been-operated-upon-or-closed-java-8
+    public Double getPrice(CustomerType customerType, List<LocalDate> dates) {
+        // Best practice to convert an stream of strings to an object: https://stackoverflow.com/questions/24882927/using-java-8-to-convert-a-list-of-objects-into-a-string-obtained-from-the-tostri
+        logger.info("getPrice for {}, for dates {}",
+                customerType,
+                dates.stream().map(Object::toString).collect(Collectors.joining(", "))
+                );
+        // Throw an exception in orElse branch : https://stackoverflow.com/questions/38571537/optional-in-orelse-branch-throws-exception
+        // https://stackoverflow.com/questions/23860533/copy-a-stream-to-avoid-stream-has-already-been-operated-upon-or-closed-java-8
+        return dates.stream().mapToDouble(
+                ld -> getPrice(customerType, ld).orElseThrow(
+                        NoPriceSpecifiedException::new).getPrice()
+                ).sum();
     }
 
     public Optional<Price> getPrice(CustomerType customerType, LocalDate date) {

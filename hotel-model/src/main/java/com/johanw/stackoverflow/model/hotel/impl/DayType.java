@@ -1,4 +1,4 @@
-package com.johanw.stackoverflow.hotel.model.impl;
+package com.johanw.stackoverflow.model.hotel.impl;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

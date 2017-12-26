@@ -1,10 +1,6 @@
-package com.johanw.stackoverflow.hotel.model.impl;
+package com.johanw.stackoverflow.model.hotel.impl;
 
-import com.johanw.stackoverflow.hotel.model.CustomerType;
-import com.johanw.stackoverflow.hotel.model.Hotel;
-import com.johanw.stackoverflow.hotel.model.StarRating;
-
-import java.util.List;
+import com.johanw.stackoverflow.model.hotel.CustomerType;
 
 public class Price {
     private DayType dayType;

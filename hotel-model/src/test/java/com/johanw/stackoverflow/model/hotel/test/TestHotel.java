@@ -1,15 +1,17 @@
-package com.johanw.stackoverflow.hotel.model.test;
+package com.johanw.stackoverflow.model.hotel.test;
 
-import com.johanw.stackoverflow.hotel.model.CustomerType;
-import com.johanw.stackoverflow.hotel.model.Hotel;
-import com.johanw.stackoverflow.hotel.model.StarRating;
-import com.johanw.stackoverflow.hotel.model.impl.DayType;
-import com.johanw.stackoverflow.hotel.model.impl.HotelImpl;
-import com.johanw.stackoverflow.hotel.model.impl.Price;
+import com.johanw.stackoverflow.model.hotel.CustomerType;
+import com.johanw.stackoverflow.model.hotel.Hotel;
+import com.johanw.stackoverflow.model.hotel.StarRating;
+import com.johanw.stackoverflow.model.hotel.impl.DayType;
+import com.johanw.stackoverflow.model.hotel.impl.HotelImpl;
+import com.johanw.stackoverflow.model.hotel.impl.Price;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 // https://www.kenneth-truyers.net/2013/07/15/flexible-and-expressive-unit-tests-with-the-builder-pattern/
 public class TestHotel {
@@ -91,13 +93,13 @@ public class TestHotel {
     @Test
     public void test() {
         Hotel hotel1 = hotels[0];
-        double price1 = hotel1.getPrice(CustomerType.REGULAR_CUSTOMER, LocalDate.of(2017, 12, 24));
+        double price1 = hotel1.getPrice(CustomerType.REGULAR_CUSTOMER, Arrays.asList(LocalDate.of(2017, 12, 24)));
         Assert.assertEquals(100, price1, 0.0);
-        double price2 = hotel1.getPrice(CustomerType.PRIVILEGE_CUSTOMER, LocalDate.of(2017, 12, 24));
+        double price2 = hotel1.getPrice(CustomerType.PRIVILEGE_CUSTOMER, Arrays.asList((LocalDate.of(2017, 12, 24))));
         Assert.assertEquals(90, price2, 0.0);
-        double price3 = hotel1.getPrice(CustomerType.REGULAR_CUSTOMER, LocalDate.of(2017, 12, 25));
+        double price3 = hotel1.getPrice(CustomerType.REGULAR_CUSTOMER, Arrays.asList((LocalDate.of(2017, 12, 25))));
         Assert.assertEquals(80, price3, 0.0);
-        double price4 = hotel1.getPrice(CustomerType.PRIVILEGE_CUSTOMER, LocalDate.of(2017, 12, 25));
+        double price4 = hotel1.getPrice(CustomerType.PRIVILEGE_CUSTOMER, Arrays.asList((LocalDate.of(2017, 12, 25))));
         Assert.assertEquals(70, price4, 0.0);
     }
 }

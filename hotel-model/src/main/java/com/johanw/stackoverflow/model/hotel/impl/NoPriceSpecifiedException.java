@@ -1,4 +1,4 @@
-package com.johanw.stackoverflow.hotel.model.impl;
+package com.johanw.stackoverflow.model.hotel.impl;
 
 // https://stackoverflow.com/questions/15542608/design-patterns-exception-error-handling
 public class NoPriceSpecifiedException extends RuntimeException {
